@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Visualizations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .button-container {
+            margin: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+        .chart-container {
+            display: none;
+            width: 80%;
+            margin: auto;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .chart {
+            width: 100%;
+            height: 400px;
+        }
+        .show {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Visualizations</h1>
+    <p>Explore various visualizations by clicking the buttons below:</p>
+    <div class="button-container">
+        <button class="button" onclick="showChart('carbonEmissions')">Carbon Emissions by Sector</button>
+        <button class="button" onclick="showChart('publisherComparison')">Publisher Comparison</button>
+        <button class="button" onclick="showChart('printOnDemand')">Impact of Print-on-Demand</button>
+        <button class="button" onclick="showChart('sustainabilityTracker')">Sustainability Initiatives Tracker</button>
+        <button class="button" onclick="showChart('govSupport')">Government Support and Industry Coordination</button>
+    </div>
+
+    <div id="carbonEmissions" class="chart-container">
+        <canvas id="carbonEmissionsChart" class="chart"></canvas>
+    </div>
+
+    <div id="publisherComparison" class="chart-container">
+        <canvas id="comparisonChart" class="chart"></canvas>
+    </div>
+
+    <div id="printOnDemand" class="chart-container">
+        <canvas id="podChart" class="chart"></canvas>
+    </div>
+
+    <div id="sustainabilityTracker" class="chart-container">
+        <canvas id="timelineChart" class="chart"></canvas>
+    </div>
+
+    <div id="govSupport" class="chart-container">
+        <canvas id="heatmapChart" class="chart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function showChart(chartId) {
+            const charts = document.querySelectorAll('.chart-container');
+            charts.forEach(chart => chart.classList.remove('show'));
+
+            setTimeout(() => {
+                document.getElementById(chartId).classList.add('show');
+            }, 300);  // Delay to make the transition smoother
+
+            // Loading spinner placeholder (you can implement it as needed)
+
+            if (chartId === 'carbonEmissions') {
+                const ctx = document.getElementById('carbonEmissionsChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Book Production', 'Distribution', 'Paper Usage', 'Other'],
+                        datasets: [{
+                            label: 'Carbon Emissions',
+                            data: [25, 15, 30, 30],
+                            backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.label}: ${context.raw}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            } else if (chartId === 'publisherComparison') {
+                const ctx = document.getElementById('comparisonChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Small Publishers', 'Multinational Publishers'],
+                        datasets: [{
+                            label: 'Carbon Footprint',
+                            data: [10, 50],
+                            backgroundColor: '#42a5f5'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.label}: ${context.raw} kg CO2`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            } else if (chartId === 'printOnDemand') {
+                const ctx = document.getElementById('podChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Bulk Printing', 'PoD'],
+                        datasets: [{
+                            label: 'Carbon Emissions',
+                            data: [100, 20],
+                            backgroundColor: 'rgba(102, 187, 106, 0.5)',
+                            borderColor: '#388e3c',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.label}: ${context.raw} kg CO2`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            } else if (chartId === 'sustainabilityTracker') {
+                const ctx = document.getElementById('timelineChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Initiative 1', 'Initiative 2', 'Initiative 3'],
+                        datasets: [{
+                            label: 'Reduction in Emissions',
+                            data: [10, 20, 30],
+                            backgroundColor: 'rgba(255, 152, 0, 0.7)',
+                            borderColor: '#ff9800',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.label}: ${context.raw}% reduction`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            } else if (chartId === 'govSupport') {
+                const ctx = document.getElementById('heatmapChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bubble',
+                    data: {
+                        datasets: [{
+                            label: 'Government Support',
+                            data: [
+                                {x: 10, y: 20, r: 10},
+                                {x: 20, y: 30, r: 20},
+                                {x: 30, y: 40, r: 30}
+                            ],
+                            backgroundColor: 'rgba(229, 115, 115, 0.8)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `Support: $${context.raw.x} million, Coordination: ${context.raw.y}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
