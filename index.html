@@ -41,19 +41,15 @@
         }
         .chart-container {
             display: none;
-            width: 80%;
+            width: 100%; /* Adjusts to 100% width of the parent container */
             margin: auto;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
         }
         .chart {
             width: 100%;
-            height: 400px;
-        }
-        
-        #comparisonChart{
-          width: 75%;
-          height: 250px;
+            height: auto;
+            max-height: 400px; /* Ensures charts don't get too tall */
         }
         .show {
             display: block;
@@ -102,8 +98,6 @@
                 document.getElementById(chartId).classList.add('show');
             }, 300);  // Delay to make the transition smoother
 
-            // Loading spinner placeholder (you can implement it as needed)
-
             if (chartId === 'carbonEmissions') {
                 const ctx = document.getElementById('carbonEmissionsChart').getContext('2d');
                 new Chart(ctx, {
@@ -118,6 +112,7 @@
                     },
                     options: {
                         responsive: true,
+                        maintainAspectRatio: false,
                         plugins: {
                             tooltip: {
                                 callbacks: {
@@ -143,6 +138,7 @@
                     },
                     options: {
                         responsive: true,
+                        maintainAspectRatio: false,
                         plugins: {
                             tooltip: {
                                 callbacks: {
@@ -170,6 +166,7 @@
                     },
                     options: {
                         responsive: true,
+                        maintainAspectRatio: false,
                         plugins: {
                             tooltip: {
                                 callbacks: {
@@ -197,6 +194,7 @@
                     },
                     options: {
                         responsive: true,
+                        maintainAspectRatio: false,
                         plugins: {
                             tooltip: {
                                 callbacks: {
@@ -225,6 +223,7 @@
                     },
                     options: {
                         responsive: true,
+                        maintainAspectRatio: false,
                         plugins: {
                             tooltip: {
                                 callbacks: {
