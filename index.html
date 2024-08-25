@@ -50,6 +50,11 @@
             width: 100%;
             height: 400px;
         }
+        
+        .chart #comparisonChart{
+          width: 70%;
+          height: 200px;
+        }
         .show {
             display: block;
             opacity: 1;
@@ -129,7 +134,7 @@
                 new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['Small Publishers', 'Multinational Publishers'],
+                        labels: ['Small / Independent Publishers', 'Multinational Publishers'],
                         datasets: [{
                             label: 'Carbon Footprint',
                             data: [10, 50],
